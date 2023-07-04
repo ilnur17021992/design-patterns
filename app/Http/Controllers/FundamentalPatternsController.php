@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DesignPatterns\Fundamental\BlogPost;
 use App\DesignPatterns\Fundamental\Delegation\AppMessenger;
+use App\DesignPatterns\Fundamental\EventChanel\EventChanel;
+use App\DesignPatterns\Fundamental\EventChanel\Publisher;
+use App\DesignPatterns\Fundamental\EventChanel\Subscriber;
+use App\DesignPatterns\Fundamental\PropertyContainer\BlogPost;
 
 class FundamentalPatternsController extends Controller
 {
     public function propertyContainer()
     {
         $blog = new BlogPost();
+        
         $blog->setTitle('Заголовок статьи');
         $blog->setCategoryId(7);
 
@@ -48,5 +52,33 @@ class FundamentalPatternsController extends Controller
             ->send();
 
         dump($messenger);
+    }
+
+    public function eventChanel()
+    {
+        $chanel = new EventChanel();
+
+        $hightNews = new Publisher('hight-news', $chanel);
+        $winterNews = new Publisher('winter-news', $chanel);
+        $winterNewsDaily = new Publisher('winter-news', $chanel);
+        
+        $alex = new Subscriber('alex');
+        $max = new Subscriber('max');
+        $anna = new Subscriber('anna');
+        $elena = new Subscriber('elena');
+        
+        $chanel->subscribe('hight-news', $anna);
+        $chanel->subscribe('hight-news', $alex);
+        $chanel->subscribe('hight-news', $max);
+        $chanel->subscribe('winter-news', $max);
+        $chanel->subscribe('winter-news', $elena);
+        
+        $hightNews->publish('hight news');
+        $winterNews->publish('winter news');
+        $winterNewsDaily->publish('winter daily news');
+
+        dump($hightNews);
+        dump($winterNews);
+        dump($winterNewsDaily);
     }
 }
