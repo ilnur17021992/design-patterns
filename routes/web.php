@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\FundamentalPatternsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/test', TestController::class);
+
+Route::prefix('/fundamental')->group(function () {
+    Route::get('/property-container', [FundamentalPatternsController::class, 'propertyContainer']);
+});
+
