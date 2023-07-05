@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\CreationPatternsController;
 use App\Http\Controllers\FundamentalPatternsController;
 
 /*
@@ -26,4 +27,9 @@ Route::prefix('/fundamental')->group(function () {
     Route::get('/delegation', [FundamentalPatternsController::class, 'delegation']);
     Route::get('/event-chanel', [FundamentalPatternsController::class, 'eventChanel']);
 });
+
+Route::prefix('/creation')->group(function () {
+    Route::get('/abstract-factories', [CreationPatternsController::class, 'abstractFactory']);
+});
+
 
