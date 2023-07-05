@@ -2,7 +2,7 @@
 
 namespace App\DesignPatterns\Creational\FactoryMethod\Forms;
 
-use App\DesignPatterns\Creational\FactoryMethod\Forms\Interfaces\FormInterface;
+use App\DesignPatterns\Creational\FactoryMethod\Interfaces\FormInterface;
 use App\DesignPatterns\Creational\AbstractFactory\Interfaces\GuiFactoryInterface;
 
 abstract class AbstractForm implements FormInterface

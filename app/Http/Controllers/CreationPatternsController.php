@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\DesignPatterns\Creational\AbstractFactory\GuiKitFactory;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\MaterialDialogForm;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\BootstrapDialogForm;
-
+use App\DesignPatterns\Creational\StaticFactory\StaticFactory;
 
 class CreationPatternsController extends Controller
 {
@@ -34,5 +34,14 @@ class CreationPatternsController extends Controller
         $result = $dialogForm->render();
 
         dump($result);
+    }
+
+    public function staticFactory()
+    {
+        $mailMessenger = StaticFactory::build('email');
+        $smsMessenger = StaticFactory::build('sms');
+        
+        dump($mailMessenger);
+        dump($smsMessenger);
     }
 }

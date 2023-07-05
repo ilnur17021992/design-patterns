@@ -29,8 +29,9 @@ Route::prefix('/fundamental')->group(function () {
 });
 
 Route::prefix('/creation')->group(function () {
-    Route::get('/abstract-factories', [CreationPatternsController::class, 'abstractFactory']);
+    Route::get('/abstract-factory', [CreationPatternsController::class, 'abstractFactory']);
     Route::get('/factory-method', [CreationPatternsController::class, 'factoryMethod']);
+    Route::get('/static-factory', [CreationPatternsController::class, 'staticFactory']);
 });
 
 
