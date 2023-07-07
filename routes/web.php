@@ -33,6 +33,7 @@ Route::prefix('/creation')->group(function () {
     Route::get('/factory-method', [CreationPatternsController::class, 'factoryMethod']);
     Route::get('/static-factory', [CreationPatternsController::class, 'staticFactory']);
     Route::get('/simple-factory', [CreationPatternsController::class, 'simpleFactory']);
+    Route::get('/singleton', [CreationPatternsController::class, 'singleton']);
 });
 
 
