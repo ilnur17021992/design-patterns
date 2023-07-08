@@ -11,6 +11,7 @@ use App\DesignPatterns\Creational\StaticFactory\StaticFactory;
 use App\DesignPatterns\Creational\AbstractFactory\GuiKitFactory;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\MaterialDialogForm;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\BootstrapDialogForm;
+use App\DesignPatterns\Creational\Multiton\Multiton;
 use App\DesignPatterns\Creational\Singleton\Interfaces\LaravelSingletonInterface;
 use Barryvdh\Debugbar\Facades\Debugbar;
 
@@ -87,5 +88,17 @@ class CreationPatternsController extends Controller
         
         dump($result);
         Debugbar::info($result);
+    }
+
+    public function multiton()
+    {
+        $multiton[] = Multiton::getInstance('MySQL');
+        $multiton[] = Multiton::getInstance('MySQL');
+        
+        $multiton[] = Multiton::getInstance('PostgreSQL');
+        $multiton[] = Multiton::getInstance('PostgreSQL');
+
+        dump($multiton);
+        Debugbar::info($multiton);
     }
 }
