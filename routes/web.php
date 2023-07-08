@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BehavioralPatternsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\CreationPatternsController;
@@ -36,4 +37,9 @@ Route::prefix('/creation')->group(function () {
     Route::get('/singleton', [CreationPatternsController::class, 'singleton']);
 });
 
+
+
+Route::prefix('/behavioral')->group(function () {
+    Route::get('/strategy', [BehavioralPatternsController::class, 'strategy']);
+});
 
