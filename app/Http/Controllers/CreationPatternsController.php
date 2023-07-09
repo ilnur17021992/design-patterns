@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use App\DesignPatterns\Creational\Multiton\Multiton;
+use App\DesignPatterns\Creational\Builder\BlogPostBuilder;
 use App\DesignPatterns\Creational\Singleton\SimpleSingleton;
 use App\DesignPatterns\Creational\Singleton\LaravelSingleton;
 use App\DesignPatterns\Creational\SimpleFactory\SimpleFactory;
 use App\DesignPatterns\Creational\Singleton\AdvancedSingleton;
 use App\DesignPatterns\Creational\StaticFactory\StaticFactory;
 use App\DesignPatterns\Creational\AbstractFactory\GuiKitFactory;
+use App\DesignPatterns\Creational\Builder\BlogPostManager;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\MaterialDialogForm;
 use App\DesignPatterns\Creational\FactoryMethod\Forms\BootstrapDialogForm;
-use App\DesignPatterns\Creational\Multiton\Multiton;
 use App\DesignPatterns\Creational\Singleton\Interfaces\LaravelSingletonInterface;
-use Barryvdh\Debugbar\Facades\Debugbar;
 
 class CreationPatternsController extends Controller
 {
@@ -100,5 +102,21 @@ class CreationPatternsController extends Controller
 
         dump($multiton);
         Debugbar::info($multiton);
+    }
+
+    public function builder()
+    {
+        $builder = new BlogPostBuilder();
+        $posts[] = $builder->setTitle('From Builder')->getBlogPost();
+
+        $manager = new BlogPostManager();
+        $manager->setBuilder($builder);
+
+        $posts[] = $manager->createCleanPost();
+        $posts[] = $manager->createNewPostIt();
+        $posts[] = $manager->createNewPostCats();
+
+        dump($posts);
+        Debugbar::info($posts);
     }
 }

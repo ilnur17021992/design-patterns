@@ -36,6 +36,7 @@ Route::prefix('/creation')->group(function () {
     Route::get('/simple-factory', [CreationPatternsController::class, 'simpleFactory']);
     Route::get('/singleton', [CreationPatternsController::class, 'singleton']);
     Route::get('/multiton', [CreationPatternsController::class, 'multiton']);
+    Route::get('/builder', [CreationPatternsController::class, 'builder']);
 });
 
 
