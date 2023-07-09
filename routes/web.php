@@ -39,9 +39,6 @@ Route::prefix('/creation')->group(function () {
     Route::get('/builder', [CreationPatternsController::class, 'builder']);
 });
 
-
-
 Route::prefix('/behavioral')->group(function () {
     Route::get('/strategy', [BehavioralPatternsController::class, 'strategy']);
 });
-
