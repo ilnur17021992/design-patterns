@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DesignPatterns\Structural\Adapter\Interfaces\MediaLibraryThirdPartyInterface;
+use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
 use Illuminate\Http\Request;
 use App\DesignPatterns\Structural\DTO\UserDTO;
 use App\DesignPatterns\Structural\DTO\UserDTO2;
@@ -59,4 +61,14 @@ class StructuralPatternsController extends Controller
         dump($request->all());
     }
 
+    public function adapter()
+    {
+        // $mediaLibrary = app(MediaLibraryAdapter::class);
+        $mediaLibrary = app(MediaLibraryThirdPartyInterface::class);
+
+        $result[] = $mediaLibrary->upload('test.txt');
+        $result[] = $mediaLibrary->get('test.txt');
+
+        dump($result);
+    }
 }
