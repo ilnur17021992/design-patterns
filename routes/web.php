@@ -46,4 +46,5 @@ Route::prefix('/behavioral')->group(function () {
 
 Route::prefix('/structural')->group(function () {
     Route::get('/decorator', [StructuralPatternsController::class, 'decorator']);
+    Route::get('/dto', [StructuralPatternsController::class, 'dto']);
 });
