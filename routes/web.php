@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\BehavioralPatternsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\CreationPatternsController;
+use App\Http\Controllers\BehavioralPatternsController;
+use App\Http\Controllers\StructuralPatternsController;
 use App\Http\Controllers\FundamentalPatternsController;
 
 /*
@@ -41,4 +42,8 @@ Route::prefix('/creation')->group(function () {
 
 Route::prefix('/behavioral')->group(function () {
     Route::get('/strategy', [BehavioralPatternsController::class, 'strategy']);
+});
+
+Route::prefix('/structural')->group(function () {
+    Route::get('/decorator', [StructuralPatternsController::class, 'decorator']);
 });
