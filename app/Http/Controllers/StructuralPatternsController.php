@@ -8,12 +8,16 @@ use App\DesignPatterns\Structural\DTO\UserDTO2;
 use App\DesignPatterns\Structural\DTO\UserDTO3;
 use App\DesignPatterns\Structural\DTO\UserDTO4;
 use App\DesignPatterns\Structural\Facade\Computer;
+use App\DesignPatterns\Structural\Bridge\PdfPrinter;
+use App\DesignPatterns\Structural\Bridge\ExcelPrinter;
+use App\DesignPatterns\Structural\Bridge\WeeklyReport;
 use App\DesignPatterns\Structural\Decorator\TextEmpty;
 use App\DesignPatterns\Structural\Decorator\TextHello;
 use App\DesignPatterns\Structural\Decorator\TextSpace;
 use App\DesignPatterns\Structural\Decorator\TextWorld;
 use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
 use App\DesignPatterns\Structural\Adapter\Interfaces\MediaLibraryThirdPartyInterface;
+use App\DesignPatterns\Structural\Bridge\WordPrinter;
 
 class StructuralPatternsController extends Controller
 {
@@ -34,7 +38,7 @@ class StructuralPatternsController extends Controller
         $dto->lastName = 'Doe';
         dump($dto);
 
-        
+
         $dto2 = new UserDTO2();
         $dto2->id = 1;
         $dto2->firstName = 'John';
@@ -42,7 +46,7 @@ class StructuralPatternsController extends Controller
         dump($dto2->toArray());
         dump($dto2->toJson());
 
-        
+
         $dto3 = new UserDTO3(1, 'John', 'Doe');
         dump($dto3->getId());
         dump($dto3->getFirstName());
@@ -79,5 +83,17 @@ class StructuralPatternsController extends Controller
         $computer->startComputer();
 
         dump($computer);
+    }
+
+    public function bridge()
+    {
+        $report = new WeeklyReport(new ExcelPrinter());
+        $report->print(['header' => 'my header for excel', 'body' => 'my body for excel']);
+        
+        $report = new WeeklyReport(new PdfPrinter());
+        $report->print(['header' => 'my header for pdf', 'body' => 'my body for pdf']);
+
+        $report = new WeeklyReport(new WordPrinter());
+        $report->print(['header' => 'my header for word', 'body' => 'my body for word']);
     }
 }
