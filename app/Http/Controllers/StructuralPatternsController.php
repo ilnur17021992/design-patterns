@@ -9,15 +9,22 @@ use App\DesignPatterns\Structural\DTO\UserDTO3;
 use App\DesignPatterns\Structural\DTO\UserDTO4;
 use App\DesignPatterns\Structural\Facade\Computer;
 use App\DesignPatterns\Structural\Bridge\PdfPrinter;
+use App\DesignPatterns\Structural\Bridge\WordPrinter;
 use App\DesignPatterns\Structural\Bridge\ExcelPrinter;
 use App\DesignPatterns\Structural\Bridge\WeeklyReport;
 use App\DesignPatterns\Structural\Decorator\TextEmpty;
 use App\DesignPatterns\Structural\Decorator\TextHello;
 use App\DesignPatterns\Structural\Decorator\TextSpace;
 use App\DesignPatterns\Structural\Decorator\TextWorld;
+use App\DesignPatterns\Structural\Bridge\Entities\Product;
+use App\DesignPatterns\Structural\Bridge\Entities\Category;
 use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
+use App\DesignPatterns\Structural\Bridge\ProductWidgetRealization;
+use App\DesignPatterns\Structural\Bridge\CategoryWidgetRealization;
+use App\DesignPatterns\Structural\Bridge\Abstractions\WidgetBigAbstraction;
+use App\DesignPatterns\Structural\Bridge\Abstractions\WidgetSmallAbstraction;
+use App\DesignPatterns\Structural\Bridge\Abstractions\WidgetMiddleAbstraction;
 use App\DesignPatterns\Structural\Adapter\Interfaces\MediaLibraryThirdPartyInterface;
-use App\DesignPatterns\Structural\Bridge\WordPrinter;
 
 class StructuralPatternsController extends Controller
 {
@@ -87,13 +94,21 @@ class StructuralPatternsController extends Controller
 
     public function bridge()
     {
-        $report = new WeeklyReport(new ExcelPrinter());
-        $report->print(['header' => 'my header for excel', 'body' => 'my body for excel']);
-        
-        $report = new WeeklyReport(new PdfPrinter());
-        $report->print(['header' => 'my header for pdf', 'body' => 'my body for pdf']);
+        $productRealization = new ProductWidgetRealization(new Product());
+        $categoryRealization = new CategoryWidgetRealization(new Category());
 
-        $report = new WeeklyReport(new WordPrinter());
-        $report->print(['header' => 'my header for word', 'body' => 'my body for word']);
+        $views = [
+            new WidgetBigAbstraction(),
+            new WidgetMiddleAbstraction(),
+            new WidgetSmallAbstraction(),
+        ];
+
+        foreach ($views as $view) {
+            $view->run($productRealization);
+            $view->run($categoryRealization);
+        }
+
+        dump($productRealization);
+        dump($categoryRealization);
     }
 }
