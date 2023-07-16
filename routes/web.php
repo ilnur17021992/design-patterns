@@ -48,4 +48,6 @@ Route::prefix('/structural')->group(function () {
     Route::get('/decorator', [StructuralPatternsController::class, 'decorator']);
     Route::get('/dto', [StructuralPatternsController::class, 'dto']);
     Route::get('/adapter', [StructuralPatternsController::class, 'adapter']);
+    Route::get('/facade', [StructuralPatternsController::class, 'facade']);
+
 });

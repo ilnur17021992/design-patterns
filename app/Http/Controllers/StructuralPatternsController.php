@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DesignPatterns\Structural\Adapter\Interfaces\MediaLibraryThirdPartyInterface;
-use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
 use Illuminate\Http\Request;
 use App\DesignPatterns\Structural\DTO\UserDTO;
 use App\DesignPatterns\Structural\DTO\UserDTO2;
 use App\DesignPatterns\Structural\DTO\UserDTO3;
 use App\DesignPatterns\Structural\DTO\UserDTO4;
+use App\DesignPatterns\Structural\Facade\Computer;
 use App\DesignPatterns\Structural\Decorator\TextEmpty;
 use App\DesignPatterns\Structural\Decorator\TextHello;
 use App\DesignPatterns\Structural\Decorator\TextSpace;
 use App\DesignPatterns\Structural\Decorator\TextWorld;
+use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
+use App\DesignPatterns\Structural\Adapter\Interfaces\MediaLibraryThirdPartyInterface;
 
 class StructuralPatternsController extends Controller
 {
@@ -70,5 +71,13 @@ class StructuralPatternsController extends Controller
         $result[] = $mediaLibrary->get('test.txt');
 
         dump($result);
+    }
+
+    public function facade()
+    {
+        $computer = new Computer();
+        $computer->startComputer();
+
+        dump($computer);
     }
 }
