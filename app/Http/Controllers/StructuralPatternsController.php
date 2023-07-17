@@ -7,11 +7,13 @@ use App\DesignPatterns\Structural\DTO\UserDTO;
 use App\DesignPatterns\Structural\DTO\UserDTO2;
 use App\DesignPatterns\Structural\DTO\UserDTO3;
 use App\DesignPatterns\Structural\DTO\UserDTO4;
+use App\DesignPatterns\Structural\Composite\Leaf;
 use App\DesignPatterns\Structural\Facade\Computer;
 use App\DesignPatterns\Structural\Bridge\PdfPrinter;
 use App\DesignPatterns\Structural\Bridge\WordPrinter;
 use App\DesignPatterns\Structural\Bridge\ExcelPrinter;
 use App\DesignPatterns\Structural\Bridge\WeeklyReport;
+use App\DesignPatterns\Structural\Composite\Composite;
 use App\DesignPatterns\Structural\Decorator\TextEmpty;
 use App\DesignPatterns\Structural\Decorator\TextHello;
 use App\DesignPatterns\Structural\Decorator\TextSpace;
@@ -19,6 +21,7 @@ use App\DesignPatterns\Structural\Decorator\TextWorld;
 use App\DesignPatterns\Structural\Bridge\Entities\Product;
 use App\DesignPatterns\Structural\Bridge\Entities\Category;
 use App\DesignPatterns\Structural\Adapter\MediaLibraryAdapter;
+use App\DesignPatterns\Structural\Composite\OrderPriceComposite;
 use App\DesignPatterns\Structural\Bridge\ProductWidgetRealization;
 use App\DesignPatterns\Structural\Bridge\CategoryWidgetRealization;
 use App\DesignPatterns\Structural\Bridge\Abstractions\WidgetBigAbstraction;
@@ -110,5 +113,28 @@ class StructuralPatternsController extends Controller
 
         dump($productRealization);
         dump($categoryRealization);
+    }
+
+    public function composite()
+    {
+        $root = new Composite("root");
+
+        $root->add(new Leaf("Leaf A"));
+        $root->add(new Leaf("Leaf B"));
+
+        $comp = new Composite("Composite X");
+
+        $comp->add(new Leaf("Leaf XA"));
+        $comp->add(new Leaf("Leaf XB"));
+        $root->add($comp);
+        $root->add(new Leaf("Leaf C"));
+
+        $leaf = new Leaf("Leaf D");
+        $root->add($leaf);
+        $root->remove($leaf);
+
+        $root->display();
+
+        dump($root);
     }
 }
